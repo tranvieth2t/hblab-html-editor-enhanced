@@ -261,6 +261,9 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
             if (t.getIcons1()[i].icon == Icons.format_underline) {
               _fontSelected[i] = fontList[2] ?? false;
             }
+            if (t.getIcons1()[i].icon == Icons.strikethrough_s) {
+              _fontSelected[i] = miscFontList[0] ?? false;
+            }
           }
           for (var i = 0; i < _miscFontSelected.length; i++) {
             if (t.getIcons2()[i].icon == Icons.format_strikethrough) {
@@ -310,7 +313,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
           isBold: fontList[0] ?? false,
           isItalic: fontList[1] ?? false,
           isUnderline: fontList[2] ?? false,
-          isStrikethrough: miscFontList[0] ?? false,
+          isStrikethrough: fontList[3] ?? false,
           isSuperscript: miscFontList[1] ?? false,
           isSubscript: miscFontList[2] ?? false,
           foregroundColor: _foreColorSelected,
@@ -913,10 +916,12 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
               }
               if (t.getIcons1()[index].icon == Icons.strikethrough_s) {
                 var proceed = await widget.htmlToolbarOptions.onButtonPressed
-                        ?.call(ButtonType.clearFormatting, null, null) ??
+                    ?.call(ButtonType.strikethrough,
+                    _miscFontSelected[index], updateStatus) ??
                     true;
                 if (proceed) {
                   widget.controller.execCommand('strikeThrough');
+                  updateStatus();
                 }
               }
             },
