@@ -313,7 +313,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
           isBold: fontList[0] ?? false,
           isItalic: fontList[1] ?? false,
           isUnderline: fontList[2] ?? false,
-          isStrikethrough: fontList[3] ?? false,
+          isStrikethrough: miscFontList[0] ?? false,
           isSuperscript: miscFontList[1] ?? false,
           isSubscript: miscFontList[2] ?? false,
           foregroundColor: _foreColorSelected,

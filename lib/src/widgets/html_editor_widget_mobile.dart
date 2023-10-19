@@ -137,7 +137,7 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
                         handlerName: 'FormatSettings',
                         callback: (e) {
                           var json = e[0] as Map<String, dynamic>;
-                          print(json);
+                          // print(json);
                           if (widget.controller.toolbar != null) {
                             widget.controller.toolbar!.updateToolbar(json);
                           }
@@ -177,7 +177,7 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
                     return NavigationActionPolicy.ALLOW;
                   },
                   onConsoleMessage: (controller, message) {
-                    print(message.message);
+                    print(message);
                   },
                   onWindowFocus: (controller) async {
                     if (widget.htmlEditorOptions.shouldEnsureVisible &&
@@ -191,7 +191,7 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
                         !visibleStream.isClosed) {
                       Future<void> setHeightJS() async {
                         await controller.evaluateJavascript(source: """
-                                \$('div.note-editable').outerHeight(${max(docHeight - (toolbarKey.currentContext?.size?.height ?? 0), 30)});
+                                \$('div.note-editable').outerHeight(${max(docHeight - (toolbarKey.currentContext?.size?.height ?? 0), -60)});
                                 // from https://stackoverflow.com/a/67152280
                                 var selection = window.getSelection();
                                 if (selection.rangeCount) {
