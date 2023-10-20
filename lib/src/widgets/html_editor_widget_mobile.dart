@@ -93,7 +93,7 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
       });
       await widget.controller.editorController!.evaluateJavascript(
           source:
-              "\$('div.note-editable').outerHeight(${widget.otherOptions.height - (toolbarKey.currentContext?.size?.height ?? 0)});");
+              "\$('div.note-editable').outerHeight(${widget.otherOptions.height - 60 - (toolbarKey.currentContext?.size?.height ?? 0)});");
     }
   }
 
@@ -480,7 +480,7 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
                                           widget.otherOptions.height) +
                                       (toolbarKey
                                               .currentContext?.size?.height ??
-                                          0);
+                                          0) - 100;
                                 });
                               }
                             });
