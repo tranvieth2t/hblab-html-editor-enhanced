@@ -71,7 +71,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
   double _actualFontSizeSelectedItem = 12;
 
   /// Sets the selected item for the font units dropdown
-  String _fontSizeUnitSelectedItem = 'pt';
+  String _fontSizeUnitSelectedItem = 'px';
 
   /// Sets the selected item for the foreground color dialog
   Color _foreColorSelected = Colors.black;
@@ -729,20 +729,19 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                     value: 3,
                     child: PointerInterceptor(
                         child: Text(
-                            "${_fontSizeUnitSelectedItem == "px" ? "16" : "12"}")),
+                            "${_fontSizeUnitSelectedItem == "px" ? "12" : "12"}")),
                   ),
                   CustomDropdownMenuItem(
-
                     value: 5,
                     child: PointerInterceptor(
                         child: Text(
-                            "${_fontSizeUnitSelectedItem == "px" ? "24" : "18"}")),
+                            "${_fontSizeUnitSelectedItem == "px" ? "18" : "18"}")),
                   ),
                   CustomDropdownMenuItem(
                     value: 6,
                     child: PointerInterceptor(
                         child: Text(
-                            "${_fontSizeUnitSelectedItem == "px" ? "32" : "24"}")),
+                            "${_fontSizeUnitSelectedItem == "px" ? "24" : "24"}")),
                   ),
                 ],
                 value: _fontSizeSelectedItem,
@@ -765,13 +764,13 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                             true;
                     if (proceed) {
                       switch (intChanged) {
-                        case 3:
+                        case 2:
                           _actualFontSizeSelectedItem = 12;
                           break;
-                        case 5:
+                        case 4:
                           _actualFontSizeSelectedItem = 18;
                           break;
-                        case 6:
+                        case 5:
                           _actualFontSizeSelectedItem = 24;
                           break;
                       }
