@@ -68,7 +68,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
   double _fontSizeSelectedItem = 3;
 
   /// Keeps track of the current font size in px
-  double _actualFontSizeSelectedItem = 16;
+  double _actualFontSizeSelectedItem = 12;
 
   /// Sets the selected item for the font units dropdown
   String _fontSizeUnitSelectedItem = 'pt';
@@ -766,13 +766,13 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                     if (proceed) {
                       switch (intChanged) {
                         case 3:
-                          _actualFontSizeSelectedItem = 16;
+                          _actualFontSizeSelectedItem = 12;
                           break;
                         case 5:
-                          _actualFontSizeSelectedItem = 24;
+                          _actualFontSizeSelectedItem = 18;
                           break;
                         case 6:
-                          _actualFontSizeSelectedItem = 32;
+                          _actualFontSizeSelectedItem = 24;
                           break;
                       }
                       widget.controller.execCommand('fontSize',

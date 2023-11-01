@@ -116,7 +116,7 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
           }
         },
         child: Container(
-          height: docHeight + 10,
+          height: docHeight,
           decoration: widget.otherOptions.decoration,
           child: Column(
             children: [
@@ -191,13 +191,13 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
                         !visibleStream.isClosed) {
                       Future<void> setHeightJS() async {
                         await controller.evaluateJavascript(source: """
-                                \$('div.note-editable').outerHeight(${max(docHeight - (toolbarKey.currentContext?.size?.height ?? 0), 30)});
+                                \$('div.note-editable').outerHeight(${max(docHeight+50 - (toolbarKey.currentContext?.size?.height ?? 0), 30)});
                                 // from https://stackoverflow.com/a/67152280
                                 var selection = window.getSelection();
                                 if (selection.rangeCount) {
                                   var firstRange = selection.getRangeAt(0);
                                   if (firstRange.commonAncestorContainer !== document) {
-                                    var tempAnchorEl = document.createElement('br');
+                                    var tempAnchorEl = document.createElement('span');
                                     firstRange.insertNode(tempAnchorEl);
                                     tempAnchorEl.scrollIntoView({
                                       block: 'end',
@@ -219,7 +219,9 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
                       }
                       var visibleDecimal = await visibleStream.stream.first;
                       var newHeight = widget.otherOptions.height;
-                      if (visibleDecimal > 0.1) {
+                      print(visibleDecimal);
+                      print(newHeight);
+                      if (visibleDecimal > 0.01) {
                         this.setState(() {
                           docHeight = newHeight * visibleDecimal;
                         });
@@ -480,7 +482,7 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
                                           widget.otherOptions.height) +
                                       (toolbarKey
                                               .currentContext?.size?.height ??
-                                          0) - 100;
+                                          0);
                                 });
                               }
                             });
