@@ -726,19 +726,19 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                 style: widget.htmlToolbarOptions.textStyle,
                 items: [
                   CustomDropdownMenuItem(
-                    value: 3,
+                    value: 2,
                     child: PointerInterceptor(
                         child: Text(
                             "${_fontSizeUnitSelectedItem == "px" ? "12" : "12"}")),
                   ),
                   CustomDropdownMenuItem(
-                    value: 5,
+                    value: 4,
                     child: PointerInterceptor(
                         child: Text(
                             "${_fontSizeUnitSelectedItem == "px" ? "18" : "18"}")),
                   ),
                   CustomDropdownMenuItem(
-                    value: 6,
+                    value: 5,
                     child: PointerInterceptor(
                         child: Text(
                             "${_fontSizeUnitSelectedItem == "px" ? "24" : "24"}")),
