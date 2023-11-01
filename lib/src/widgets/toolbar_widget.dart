@@ -65,7 +65,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
   String _fontNameSelectedItem = 'Times New Roman';
 
   /// Sets the selected item for the font size dropdown
-  double _fontSizeSelectedItem = 3;
+  double _fontSizeSelectedItem = 2;
 
   /// Keeps track of the current font size in px
   double _actualFontSizeSelectedItem = 12;
