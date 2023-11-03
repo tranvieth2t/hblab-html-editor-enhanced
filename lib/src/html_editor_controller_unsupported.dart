@@ -152,6 +152,12 @@ class HtmlEditorController {
   /// Undoes the last action
   void undo() {}
 
+  /// indent
+  void indent() {}
+
+  /// outdent
+  void outdent() {}
+
   /// Internal function to change list style on Web
   @internal
   void changeListStyle(String changed) {}

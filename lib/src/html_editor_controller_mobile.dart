@@ -140,6 +140,17 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
     _evaluateJavascript(source: "\$('#summernote-2').summernote('undo');");
   }
 
+  @override
+  void indent() {
+    _evaluateJavascript(source: "\$('#summernote-2').summernote('indent');");
+  }
+
+  /// Undoes the last action
+  @override
+  void outdent() {
+    _evaluateJavascript(source: "\$('#summernote-2').summernote('outdent');");
+  }
+
   /// Redoes the last action
   @override
   void redo() {
