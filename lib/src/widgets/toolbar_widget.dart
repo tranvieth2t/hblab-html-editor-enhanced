@@ -738,7 +738,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                     value: 3,
                     child: PointerInterceptor(
                         child: Text(
-                            "${_fontSizeUnitSelectedItem == "px" ? "16" : "12"} $_fontSizeUnitSelectedItem")),
+                            "${_fontSizeUnitSelectedItem == "px" ? "16" : "12"}")),
                   ),
                   // CustomDropdownMenuItem(
                   //   value: 4,
@@ -750,13 +750,13 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                     value: 5,
                     child: PointerInterceptor(
                         child: Text(
-                            "${_fontSizeUnitSelectedItem == "px" ? "24" : "18"} $_fontSizeUnitSelectedItem")),
+                            "${_fontSizeUnitSelectedItem == "px" ? "24" : "18"}")),
                   ),
                   CustomDropdownMenuItem(
                     value: 6,
                     child: PointerInterceptor(
                         child: Text(
-                            "${_fontSizeUnitSelectedItem == "px" ? "32" : "24"} $_fontSizeUnitSelectedItem")),
+                            "${_fontSizeUnitSelectedItem == "px" ? "32" : "24"}")),
                   ),
                   // CustomDropdownMenuItem(
                   //   value: 7,
