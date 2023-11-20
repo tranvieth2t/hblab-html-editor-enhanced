@@ -62,7 +62,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
   /// Sets the selected item for the font style dropdown
   String _fontSelectedItem = 'p';
 
-  String _fontNameSelectedItem = 'Times New Roman';
+  String _fontNameSelectedItem = 'times new roman';
 
   /// Sets the selected item for the font size dropdown
   double _fontSizeSelectedItem = 3;
@@ -83,7 +83,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
   String? _listStyleSelectedItem;
 
   /// Sets the selected item for the line height dropdown
-  double _lineHeightSelectedItem = 1;
+  double _lineHeightSelectedItem = 1.0;
 
   /// Masks the toolbar with a grey color if false
   bool _enabled = true;
@@ -165,13 +165,14 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
       });
     }
     //check the font name if it matches one of the predetermined fonts and update the toolbar
-    if (['Courier New', 'sans-serif', 'Times New Roman'].contains(fontName)) {
+    if (['courier new', 'sans-serif', 'times new roman'].contains(fontName.toLowerCase())) {
       setState(mounted, this.setState, () {
-        _fontNameSelectedItem = fontName;
+        print(fontName +' change font name');
+        _fontNameSelectedItem = fontName.toLowerCase();
       });
     } else {
       setState(mounted, this.setState, () {
-        _fontNameSelectedItem = 'sans-serif';
+        _fontNameSelectedItem = 'times new roman';
       });
     }
     //update the fore/back selected color if necessary
@@ -641,13 +642,13 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                 style: widget.htmlToolbarOptions.textStyle,
                 items: [
                   CustomDropdownMenuItem(
-                    value: 'Times New Roman',
+                    value: 'times new roman',
                     child: PointerInterceptor(
                         child: Text('Times New Roman',
                             style: TextStyle(fontFamily: 'Times'))),
                   ),
                   CustomDropdownMenuItem(
-                    value: 'Courier New',
+                    value: 'courier new',
                     child: PointerInterceptor(
                         child: Text('Courier New',
                             style: TextStyle(fontFamily: 'Courier'))),
