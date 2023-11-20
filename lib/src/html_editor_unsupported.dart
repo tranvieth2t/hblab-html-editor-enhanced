@@ -16,7 +16,6 @@ class HtmlEditor extends StatelessWidget {
   /// The controller that is passed to the widget, which allows multiple [HtmlEditor]
   /// widgets to be used on the same page independently.
   final HtmlEditorController controller;
-
   /// Sets & activates Summernote's callbacks. See the functions available in
   /// [Callbacks] for more details.
   final Callbacks? callbacks;

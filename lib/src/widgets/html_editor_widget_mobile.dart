@@ -31,7 +31,6 @@ class HtmlEditorWidget extends StatefulWidget {
   final HtmlEditorOptions htmlEditorOptions;
   final HtmlToolbarOptions htmlToolbarOptions;
   final OtherOptions otherOptions;
-
   @override
   _HtmlEditorWidgetMobileState createState() => _HtmlEditorWidgetMobileState();
 }
@@ -63,9 +62,11 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
   /// Variable to cache the viewable size of the editor to update it in case
   /// the editor is focused much after its visibility changes
   double? cachedVisibleDecimal;
+  final ToolbarWidgetState toolbarWidgetState = ToolbarWidgetState();
 
   @override
   void initState() {
+    widget.controller.toolbar = toolbarWidgetState;
     docHeight = widget.otherOptions.height;
     key = getRandString(10);
     if (widget.htmlEditorOptions.filePath != null) {
@@ -96,7 +97,6 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
               "\$('div.note-editable').outerHeight(${widget.otherOptions.height - (toolbarKey.currentContext?.size?.height ?? 0)});");
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -116,18 +116,42 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
           }
         },
         child: Container(
-          height: docHeight,
           decoration: widget.otherOptions.decoration,
           child: Column(
             children: [
-              widget.htmlToolbarOptions.toolbarPosition ==
-                      ToolbarPosition.aboveEditor
-                  ? ToolbarWidget(
-                      key: toolbarKey,
-                      controller: widget.controller,
-                      htmlToolbarOptions: widget.htmlToolbarOptions,
-                      callbacks: widget.callbacks)
-                  : Container(height: 0, width: 0),
+              ToolbarWidget(
+                isBottom: false,
+                controller:widget.controller,
+                htmlToolbarOptions: HtmlToolbarOptions(
+                  toolbarItemHeight: 36,
+                  toolbarPosition: ToolbarPosition.custom,
+                  gridViewHorizontalSpacing: 1,
+                  gridViewVerticalSpacing: 0,
+                  dropdownIconSize: 24,
+                  dropdownItemHeight: 50,
+                  dropdownMenuDirection: DropdownMenuDirection.up,
+                  dropdownBoxDecoration: const BoxDecoration(),
+                  defaultToolbarButtons: const [
+                    FontSettingButtons(
+                        fontSize: true, fontName: true, fontSizeUnit: false),
+                  ],
+                  customToolbarInsertionIndices: [0],
+                  customToolbarButtons: [
+                    Row(
+                      children: [
+                        GestureDetector(
+                            onTap: () => widget.controller.undo(),
+                            child: Icon(Icons.undo)),
+                        const SizedBox(width: 16),
+                        GestureDetector(
+                            onTap: () => widget.controller.redo(),
+                            child: Icon(Icons.redo)),
+                      ],
+                    ),
+                  ],
+                ),
+                callbacks: null,
+              ),
               Expanded(
                 child: InAppWebView(
                   initialFile: filePath,
@@ -137,8 +161,9 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
                         handlerName: 'FormatSettings',
                         callback: (e) {
                           var json = e[0] as Map<String, dynamic>;
-                          // print(json);
+                          print(json);
                           if (widget.controller.toolbar != null) {
+                            widget.controller.toolbarBottom!.updateToolbar(json);
                             widget.controller.toolbar!.updateToolbar(json);
                           }
                         });
@@ -544,14 +569,33 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
                   },
                 ),
               ),
-              widget.htmlToolbarOptions.toolbarPosition ==
-                      ToolbarPosition.belowEditor
-                  ? ToolbarWidget(
-                      key: toolbarKey,
-                      controller: widget.controller,
-                      htmlToolbarOptions: widget.htmlToolbarOptions,
-                      callbacks: widget.callbacks)
-                  : Container(height: 0, width: 0),
+              ToolbarWidget(
+                controller:widget.controller,
+                htmlToolbarOptions: HtmlToolbarOptions(
+                  toolbarItemHeight: 36,
+                  toolbarPosition: ToolbarPosition.custom,
+                  gridViewHorizontalSpacing: 1,
+                  gridViewVerticalSpacing: 0,
+                  dropdownIconSize: 24,
+                  dropdownItemHeight: 50,
+                  dropdownMenuDirection: DropdownMenuDirection.up,
+                  dropdownBoxDecoration: const BoxDecoration(),
+                  defaultToolbarButtons: const [
+                    FontButtons(
+                      superscript: false,
+                      subscript: false,
+                      strikethrough: false,
+                    ),
+                    ParagraphButtons(
+                      textDirection: false,
+                      caseConverter: false,
+                      alignRight: false,
+                      alignJustify: false,
+                    ),
+                  ],
+                ),
+                callbacks: null,
+              ),
             ],
           ),
         ),

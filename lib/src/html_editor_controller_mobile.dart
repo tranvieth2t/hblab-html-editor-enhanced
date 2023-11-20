@@ -17,6 +17,8 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
   @override
   ToolbarWidgetState? toolbar;
 
+  @override
+  ToolbarWidgetState? toolbarBottom;
   /// Determines whether text processing should happen on input HTML, e.g.
   /// whether a new line should be converted to a <br>.
   ///
