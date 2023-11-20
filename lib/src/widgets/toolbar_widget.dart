@@ -163,7 +163,6 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
     //use the remaining bool lists to update the selected items accordingly
     setState(mounted, this.setState, () {
       for (var t in widget.htmlToolbarOptions.defaultToolbarButtons) {
-        print(t);
         if (t is FontButtons) {
           for (var i = 0; i < _fontSelected.length; i++) {
             if (t.getIcons1()[i].icon == Icons.format_bold) {
