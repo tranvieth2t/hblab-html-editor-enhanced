@@ -23,6 +23,8 @@ class HtmlEditorWidget extends StatefulWidget {
     required this.htmlEditorOptions,
     required this.htmlToolbarOptions,
     required this.otherOptions,
+    required this.iconRedo,
+    required this.iconUndo,
   }) : super(key: key);
 
   final HtmlEditorController controller;
@@ -31,6 +33,8 @@ class HtmlEditorWidget extends StatefulWidget {
   final HtmlEditorOptions htmlEditorOptions;
   final HtmlToolbarOptions htmlToolbarOptions;
   final OtherOptions otherOptions;
+  final Widget iconUndo;
+  final Widget iconRedo;
   @override
   _HtmlEditorWidgetMobileState createState() => _HtmlEditorWidgetMobileState();
 }
@@ -141,11 +145,11 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
                       children: [
                         GestureDetector(
                             onTap: () => widget.controller.undo(),
-                            child: Icon(Icons.undo)),
+                            child:widget.iconUndo,),
                         const SizedBox(width: 16),
                         GestureDetector(
                             onTap: () => widget.controller.redo(),
-                            child: Icon(Icons.redo)),
+                            child: widget.iconRedo,),
                       ],
                     ),
                   ],

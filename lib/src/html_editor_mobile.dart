@@ -15,6 +15,8 @@ class HtmlEditor extends StatelessWidget {
     this.htmlToolbarOptions = const HtmlToolbarOptions(),
     this.otherOptions = const OtherOptions(),
     this.plugins = const [],
+    required this.iconRedo,
+    required this.iconUndo,
   }) : super(key: key);
 
   /// The controller that is passed to the widget, which allows multiple [HtmlEditor]
@@ -37,6 +39,11 @@ class HtmlEditor extends StatelessWidget {
   /// Sets the list of Summernote plugins enabled in the editor.
   final List<Plugins> plugins;
 
+
+
+
+  final Widget iconUndo;
+  final Widget iconRedo;
   @override
   Widget build(BuildContext context) {
     if (!kIsWeb) {
@@ -48,6 +55,8 @@ class HtmlEditor extends StatelessWidget {
         htmlEditorOptions: htmlEditorOptions,
         htmlToolbarOptions: htmlToolbarOptions,
         otherOptions: otherOptions,
+        iconRedo: iconRedo,
+        iconUndo: iconUndo,
       );
     } else {
       return Text(
