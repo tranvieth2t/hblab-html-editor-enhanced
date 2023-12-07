@@ -168,22 +168,10 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
                         handlerName: 'FormatSettings',
                         callback: (e) {
                           var json = e[0] as Map<String, dynamic>;
-                          print(json);
                           if (widget.controller.toolbar != null) {
                             widget.controller.toolbarBottom!
                                 .updateToolbar(json);
                             widget.controller.toolbar!.updateToolbar(json);
-                          }
-                        });
-                    controller.addJavaScriptHandler(
-                        handlerName: 'SELECTIONS',
-                        callback: (e) {
-                          var json = e[0] as String;
-                          print(json);
-                          if (widget.controller.toolbar != null) {
-                            widget.controller.toolbarBottom!
-                                .updateSelection(json.isNotEmpty);
-                            // widget.controller.toolbar!.updateToolbar(json);
                           }
                         });
                   },
@@ -492,17 +480,9 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
                             window.flutter_inappwebview.callHandler('FormatSettings', message);
                           }
                       """);
-                      await controller.evaluateJavascript(source: """
-                                document.onselectionchange = (value) => {
-                                onSelectionChange();
-        var selection = window.getSelection();
-        if (selection.rangeCount > 0) {
-          var range = selection.getRangeAt(0);
-          var selectedText = range.toString();
-       window.flutter_inappwebview.callHandler('SELECTIONS', selectedText);
-        }
-      };
-                              """);
+                      await controller.evaluateJavascript(
+                          source:
+                              "document.onselectionchange = onSelectionChange; console.log('done');");
                       await controller.evaluateJavascript(
                           source:
                               "document.getElementsByClassName('note-editable')[0].setAttribute('inputmode', '${describeEnum(widget.htmlEditorOptions.inputType)}');");

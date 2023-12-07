@@ -47,6 +47,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
 
   /// Sets the selected item for the font style dropdown
   String _fontSelectedItem = 'p';
+
   String _fontNameSelectedItem = 'times new roman';
 
   /// Sets the selected item for the font size dropdown
@@ -66,10 +67,6 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
 
   /// Tracks the expanded status of the toolbar
   bool _isExpanded = false;
-  bool selection = false;
-  void updateSelection(bool value) {
-    selection = value;
-  }
 
   @override
   void initState() {
@@ -719,32 +716,16 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                             updateStatus) ??
                     true;
                 if (proceed) {
-                  if (!selection) {
-                    if (_fontSelected[3] && !_fontSelected[2]) {
-                      setState(mounted, this.setState, () {
-                        _fontSelected[3] = false;
-                      });
-                    }
-                  }
-
                   widget.controller.execCommand('underline');
                   updateStatus();
                 }
               }
               if (t.getIcons1()[index].icon == Icons.strikethrough_s) {
                 var proceed = await widget.htmlToolbarOptions.onButtonPressed
-                        ?.call(ButtonType.strikethrough,
-                            _miscFontSelected[index], updateStatus) ??
+                        ?.call(ButtonType.strikethrough, _fontSelected[index],
+                            updateStatus) ??
                     true;
                 if (proceed) {
-                  if (!selection) {
-                    if (!_fontSelected[3] && _fontSelected[2]) {
-                      setState(mounted, this.setState, () {
-                        _fontSelected[2] = false;
-                      });
-                    }
-                  }
-
                   widget.controller.execCommand('strikeThrough');
                   updateStatus();
                 }
