@@ -893,7 +893,12 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
               style: widget.htmlToolbarOptions.textStyle,
               items: [
                 CustomDropdownMenuItem(
-                    value: 1, child: PointerInterceptor(child: Text('1'))),
+                    value: 1,
+                    child: PointerInterceptor(
+                        child: Text(
+                      'Single',
+                      style: TextStyle(fontSize: 14),
+                    ))),
                 CustomDropdownMenuItem(
                     value: 2, child: PointerInterceptor(child: Text('2'))),
               ],
