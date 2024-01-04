@@ -101,6 +101,7 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
               "\$('div.note-editable').outerHeight(${widget.otherOptions.height - (toolbarKey.currentContext?.size?.height ?? 0)});");
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -125,7 +126,7 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
             children: [
               ToolbarWidget(
                 isBottom: false,
-                controller:widget.controller,
+                controller: widget.controller,
                 htmlToolbarOptions: HtmlToolbarOptions(
                   toolbarItemHeight: 36,
                   toolbarPosition: ToolbarPosition.custom,
@@ -144,12 +145,14 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
                     Row(
                       children: [
                         GestureDetector(
-                            onTap: () => widget.controller.undo(),
-                            child:widget.iconUndo,),
+                          onTap: () => widget.controller.undo(),
+                          child: widget.iconUndo,
+                        ),
                         const SizedBox(width: 16),
                         GestureDetector(
-                            onTap: () => widget.controller.redo(),
-                            child: widget.iconRedo,),
+                          onTap: () => widget.controller.redo(),
+                          child: widget.iconRedo,
+                        ),
                       ],
                     ),
                   ],
@@ -165,9 +168,9 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
                         handlerName: 'FormatSettings',
                         callback: (e) {
                           var json = e[0] as Map<String, dynamic>;
-                          print(json);
                           if (widget.controller.toolbar != null) {
-                            widget.controller.toolbarBottom!.updateToolbar(json);
+                            widget.controller.toolbarBottom!
+                                .updateToolbar(json);
                             widget.controller.toolbar!.updateToolbar(json);
                           }
                         });
@@ -220,7 +223,7 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
                         !visibleStream.isClosed) {
                       Future<void> setHeightJS() async {
                         await controller.evaluateJavascript(source: """
-                                \$('div.note-editable').outerHeight(${max(docHeight+50 - (toolbarKey.currentContext?.size?.height ?? 0), 30)});
+                                \$('div.note-editable').outerHeight(${max(docHeight + 50 - (toolbarKey.currentContext?.size?.height ?? 0), 30)});
                                 // from https://stackoverflow.com/a/67152280
                                 var selection = window.getSelection();
                                 if (selection.rangeCount) {
@@ -465,7 +468,7 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
                               'style': parent,
                               'fontName': fontName,
                               'fontSize': fontSize,
-                              'font': [isBold, isItalic, isUnderline],
+                              'font': [isBold, isItalic, isUnderline,isStrikethrough],
                               'miscFont': [isStrikethrough, isSuperscript, isSubscript],
                               'color': [foreColor, backColor],
                               'paragraph': [isUL, isOL],
@@ -574,7 +577,7 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
                 ),
               ),
               ToolbarWidget(
-                controller:widget.controller,
+                controller: widget.controller,
                 htmlToolbarOptions: HtmlToolbarOptions(
                   toolbarItemHeight: 36,
                   toolbarPosition: ToolbarPosition.custom,

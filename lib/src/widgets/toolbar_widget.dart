@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:html_editor_enhanced/utils/utils.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
@@ -11,7 +10,7 @@ class ToolbarWidget extends StatefulWidget {
   final HtmlEditorController controller;
   final HtmlToolbarOptions htmlToolbarOptions;
   final Callbacks? callbacks;
-  final bool isBottom ;
+  final bool isBottom;
 
   const ToolbarWidget({
     Key? key,
@@ -37,8 +36,6 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
   /// strikthrough/superscript/subscript
   List<bool> _miscFontSelected = List<bool>.filled(3, false);
 
-
-
   /// List that controls which [ToggleButtons] are selected for
   /// fullscreen, codeview, undo, redo, and help. Fullscreen and codeview
   /// are the only buttons that will ever be selected.
@@ -47,7 +44,6 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
   /// List that controls which [ToggleButtons] are selected for
   /// justify left/right/center/full.
   List<bool> _alignSelected = List<bool>.filled(4, false);
-
 
   /// Sets the selected item for the font style dropdown
   String _fontSelectedItem = 'p';
@@ -127,7 +123,8 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
     //get line height
     String lineHeight = json['lineHeight'] ?? '';
     //get list icon type
-    if (['courier new', 'sans-serif', 'times new roman'].contains(fontName.toLowerCase())) {
+    if (['courier new', 'sans-serif', 'times new roman']
+        .contains(fontName.toLowerCase())) {
       setState(mounted, this.setState, () {
         _fontNameSelectedItem = fontName.toLowerCase();
       });
@@ -175,7 +172,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
               _fontSelected[i] = fontList[2] ?? false;
             }
             if (t.getIcons1()[i].icon == Icons.strikethrough_s) {
-              _fontSelected[i] = miscFontList[0] ?? false;
+              _fontSelected[i] = fontList[3] ?? false;
             }
           }
           for (var i = 0; i < _miscFontSelected.length; i++) {
@@ -227,8 +224,9 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
           isAlignRight: alignList[2] ?? false,
           isAlignJustify: alignList[3] ?? false,
           lineHeight: _lineHeightSelectedItem,
-          textDirection:
-             TextDirection.rtl, foregroundColor: Colors.black, backgroundColor: Colors.white));
+          textDirection: TextDirection.rtl,
+          foregroundColor: Colors.black,
+          backgroundColor: Colors.white));
     }
   }
 
@@ -496,30 +494,30 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                         MediaQuery.of(context).size.height / 3,
                 style: widget.htmlToolbarOptions.textStyle,
                 items: [
-                  // CustomDropdownMenuItem(
-                  //   value: 1,
-                  //   child: PointerInterceptor(
-                  //       child: Text(
-                  //           "${_fontSizeUnitSelectedItem == "px" ? "11" : "8"} $_fontSizeUnitSelectedItem")),
-                  // ),
-                  // CustomDropdownMenuItem(
-                  //   value: 2,
-                  //   child: PointerInterceptor(
-                  //       child: Text(
-                  //           "${_fontSizeUnitSelectedItem == "px" ? "13" : "10"} $_fontSizeUnitSelectedItem")),
-                  // ),
+                  CustomDropdownMenuItem(
+                    value: 1,
+                    child: PointerInterceptor(
+                        child: Text(
+                            "${_fontSizeUnitSelectedItem == "px" ? "12" : "8"}")),
+                  ),
+                  CustomDropdownMenuItem(
+                    value: 2,
+                    child: PointerInterceptor(
+                        child: Text(
+                            "${_fontSizeUnitSelectedItem == "px" ? "14" : "10"}")),
+                  ),
                   CustomDropdownMenuItem(
                     value: 3,
                     child: PointerInterceptor(
                         child: Text(
                             "${_fontSizeUnitSelectedItem == "px" ? "16" : "12"}")),
                   ),
-                  // CustomDropdownMenuItem(
-                  //   value: 4,
-                  //   child: PointerInterceptor(
-                  //       child: Text(
-                  //           "${_fontSizeUnitSelectedItem == "px" ? "19" : "14"} $_fontSizeUnitSelectedItem")),
-                  // ),
+                  CustomDropdownMenuItem(
+                    value: 4,
+                    child: PointerInterceptor(
+                        child: Text(
+                            "${_fontSizeUnitSelectedItem == "px" ? "18" : "14"}")),
+                  ),
                   CustomDropdownMenuItem(
                     value: 5,
                     child: PointerInterceptor(
@@ -532,12 +530,12 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                         child: Text(
                             "${_fontSizeUnitSelectedItem == "px" ? "32" : "24"}")),
                   ),
-                  // CustomDropdownMenuItem(
-                  //   value: 7,
-                  //   child: PointerInterceptor(
-                  //       child: Text(
-                  //           "${_fontSizeUnitSelectedItem == "px" ? "48" : "36"} $_fontSizeUnitSelectedItem")),
-                  // ),
+                  CustomDropdownMenuItem(
+                    value: 7,
+                    child: PointerInterceptor(
+                        child: Text(
+                            "${_fontSizeUnitSelectedItem == "px" ? "48" : "36"}")),
+                  ),
                 ],
                 value: _fontSizeSelectedItem,
                 onChanged: (double? changed) async {
@@ -559,27 +557,27 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                             true;
                     if (proceed) {
                       switch (intChanged) {
-                        // case 1:
-                        //   _actualFontSizeSelectedItem = 11;
-                        //   break;
-                        // case 2:
-                        //   _actualFontSizeSelectedItem = 13;
-                        //   break;
+                        case 1:
+                          _actualFontSizeSelectedItem = 12;
+                          break;
+                        case 2:
+                          _actualFontSizeSelectedItem = 14;
+                          break;
                         case 3:
                           _actualFontSizeSelectedItem = 16;
                           break;
-                        // case 4:
-                        //   _actualFontSizeSelectedItem = 19;
-                        //   break;
+                        case 4:
+                          _actualFontSizeSelectedItem = 18;
+                          break;
                         case 5:
                           _actualFontSizeSelectedItem = 24;
                           break;
                         case 6:
                           _actualFontSizeSelectedItem = 32;
                           break;
-                        // case 7:
-                        //   _actualFontSizeSelectedItem = 48;
-                        //   break;
+                        case 7:
+                          _actualFontSizeSelectedItem = 48;
+                          break;
                         default:
                           _actualFontSizeSelectedItem = 16;
                       }
@@ -724,8 +722,8 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
               }
               if (t.getIcons1()[index].icon == Icons.strikethrough_s) {
                 var proceed = await widget.htmlToolbarOptions.onButtonPressed
-                    ?.call(ButtonType.strikethrough,
-                    _miscFontSelected[index], updateStatus) ??
+                        ?.call(ButtonType.strikethrough, _fontSelected[index],
+                            updateStatus) ??
                     true;
                 if (proceed) {
                   widget.controller.execCommand('strikeThrough');
@@ -884,25 +882,20 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
               iconSize: widget.htmlToolbarOptions.dropdownIconSize,
               itemHeight: widget.htmlToolbarOptions.dropdownItemHeight,
               focusColor: widget.htmlToolbarOptions.dropdownFocusColor,
-              dropdownColor:
-              widget.htmlToolbarOptions.dropdownBackgroundColor,
-              menuDirection:
-              widget.htmlToolbarOptions.dropdownMenuDirection ??
+              dropdownColor: widget.htmlToolbarOptions.dropdownBackgroundColor,
+              menuDirection: widget.htmlToolbarOptions.dropdownMenuDirection ??
                   (widget.htmlToolbarOptions.toolbarPosition ==
-                      ToolbarPosition.belowEditor
+                          ToolbarPosition.belowEditor
                       ? DropdownMenuDirection.up
                       : DropdownMenuDirection.down),
-              menuMaxHeight:
-              widget.htmlToolbarOptions.dropdownMenuMaxHeight ??
+              menuMaxHeight: widget.htmlToolbarOptions.dropdownMenuMaxHeight ??
                   MediaQuery.of(context).size.height / 3,
               style: widget.htmlToolbarOptions.textStyle,
               items: [
                 CustomDropdownMenuItem(
                     value: 1, child: PointerInterceptor(child: Text('1'))),
                 CustomDropdownMenuItem(
-                  value: 2,
-                  child: PointerInterceptor(child: Text('2')),
-                ),
+                    value: 2, child: PointerInterceptor(child: Text('2'))),
               ],
               value: _lineHeightSelectedItem,
               onChanged: (double? changed) async {
@@ -913,21 +906,21 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                     });
                   }
                 }
+
                 if (changed != null) {
                   var proceed =
                       await widget.htmlToolbarOptions.onDropdownChanged?.call(
-                          DropdownType.lineHeight,
-                          changed,
-                          updateSelectedItem) ??
+                              DropdownType.lineHeight,
+                              changed,
+                              updateSelectedItem) ??
                           true;
                   if (proceed) {
                     if (kIsWeb) {
                       widget.controller.changeLineHeight(changed.toString());
                     } else {
-                      await widget.controller.editorController!
-                          .evaluateJavascript(
+                      await widget.controller.editorController!.evaluateJavascript(
                           source:
-                          "\$('#summernote-2').summernote('lineHeight', '$changed');");
+                              "\$('#summernote-2').summernote('lineHeight', '$changed');");
                     }
                     updateSelectedItem(changed);
                   }
@@ -979,7 +972,6 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
             children: t.getIcons2(),
           ));
         }
-
       }
     }
     if (widget.htmlToolbarOptions.customToolbarInsertionIndices.isNotEmpty &&
