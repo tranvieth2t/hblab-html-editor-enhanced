@@ -557,27 +557,27 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                             true;
                     if (proceed) {
                       switch (intChanged) {
-                        // case 1:
-                        //   _actualFontSizeSelectedItem = 11;
-                        //   break;
-                        // case 2:
-                        //   _actualFontSizeSelectedItem = 13;
-                        //   break;
+                        case 1:
+                          _actualFontSizeSelectedItem = 12;
+                          break;
+                        case 2:
+                          _actualFontSizeSelectedItem = 14;
+                          break;
                         case 3:
                           _actualFontSizeSelectedItem = 16;
                           break;
-                        // case 4:
-                        //   _actualFontSizeSelectedItem = 19;
-                        //   break;
+                        case 4:
+                          _actualFontSizeSelectedItem = 18;
+                          break;
                         case 5:
                           _actualFontSizeSelectedItem = 24;
                           break;
                         case 6:
                           _actualFontSizeSelectedItem = 32;
                           break;
-                        // case 7:
-                        //   _actualFontSizeSelectedItem = 48;
-                        //   break;
+                        case 7:
+                          _actualFontSizeSelectedItem = 48;
+                          break;
                         default:
                           _actualFontSizeSelectedItem = 16;
                       }
@@ -900,13 +900,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                       style: TextStyle(fontSize: 14),
                     ))),
                 CustomDropdownMenuItem(
-                  value: 2,
-                  child: PointerInterceptor(
-                      child: Text(
-                    'Double',
-                    style: TextStyle(fontSize: 14),
-                  )),
-                ),
+                    value: 2, child: PointerInterceptor(child: Text('2'))),
               ],
               value: _lineHeightSelectedItem,
               onChanged: (double? changed) async {

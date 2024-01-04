@@ -76,111 +76,75 @@ class Editor extends StatefulWidget {
 class _EditorState extends State<Editor> {
   HtmlEditorController controller = HtmlEditorController();
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Expanded(
-          child: SingleChildScrollView(
-            child: HtmlEditor(
-              callbacks: Callbacks(
-                onInit: () {
-                  controller.setFocus();
-                  controller.setFullScreen();
-                },
-                onChangeContent: (value) => widget.onChange(value ?? ''),
-                onChangeSelection: (value) {
-                },
-                onFocus: () {
-                },
-                onPaste: () {},
+          child: HtmlEditor(
+            callbacks: Callbacks(
+              onInit: () {
+                controller.setFocus();
+                controller.setFullScreen();
+              },
+              onChangeContent: (value) => print(value),
+              onChangeSelection: (value) {
+             
+              },
+              onFocus: () {
+              },
+              onPaste: () {},
+            ),
+            htmlToolbarOptions: HtmlToolbarOptions(
+              separatorWidget: Container(
+                width: 1,
+                height: 24,
+                color: Color(0xFFD9D9D9),
               ),
-              htmlToolbarOptions: HtmlToolbarOptions(
-                separatorWidget: Container(
-                  width: 1,
-                  height: 24,
-                  color: Color(0xFFD9D9D9),
-                ),
-                toolbarItemHeight: 24,
-                toolbarType: ToolbarType.nativeScrollable,
-                renderBorder: false,
-                gridViewHorizontalSpacing: 1,
-                gridViewVerticalSpacing: 0,
-                dropdownIconSize: 24,
-                dropdownItemHeight: 50,
-                dropdownMenuDirection: DropdownMenuDirection.down,
-                dropdownBoxDecoration: const BoxDecoration(),
-                defaultToolbarButtons: [
-                  const FontSettingButtons(fontSize: true, fontName: true, fontSizeUnit: false),
-                ],
-                customToolbarInsertionIndices: [0],
-                customToolbarButtons: [
-                  Row(
-                    children: [
-                      GestureDetector(
+              toolbarItemHeight: 24,
+              toolbarType: ToolbarType.nativeScrollable,
+              renderBorder: false,
+              gridViewHorizontalSpacing: 1,
+              gridViewVerticalSpacing: 0,
+              dropdownIconSize: 24,
+              dropdownItemHeight: 50,
+              dropdownMenuDirection: DropdownMenuDirection.down,
+              dropdownBoxDecoration: const BoxDecoration(),
+              defaultToolbarButtons: [
+                const FontSettingButtons(fontSize: true, fontName: true, fontSizeUnit: false),
+              ],
+              customToolbarInsertionIndices: [0],
+              customToolbarButtons: [
+                Row(
+                  children: [
+                    GestureDetector(
                         onTap: () => controller.undo(),
                         child:Icon(Icons.undo)
-                      ),
-                      const SizedBox(width:16),
-                      GestureDetector(
+                    ),
+                    const SizedBox(width:16),
+                    GestureDetector(
                         onTap: () => controller.redo(),
-                          child:Icon(Icons.redo)
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              controller: controller,
-              htmlEditorOptions: HtmlEditorOptions(
-                initialText: widget.textInnit,
-              ),
-              otherOptions: OtherOptions(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.transparent),
+                        child:Icon(Icons.redo)
+                    ),
+                  ],
                 ),
-                height: MediaQuery.of(context).size.height -
-                    MediaQuery.of(context).padding.top -
-                    MediaQuery.of(context).padding.bottom -
-                    150,
-              ),
+              ],
             ),
-          ),
-        ),
-        ToolbarWidget(
-          controller: controller,
-          htmlToolbarOptions: HtmlToolbarOptions(
-            toolbarItemHeight: 36,
-            toolbarType: ToolbarType.nativeScrollable,
-            renderBorder: false,
-            gridViewHorizontalSpacing: 1,
-            gridViewVerticalSpacing: 0,
-            dropdownIconSize: 24,
-            dropdownItemHeight: 50,
-            dropdownMenuDirection: DropdownMenuDirection.up,
-            dropdownBoxDecoration: const BoxDecoration(),
-            defaultToolbarButtons: const [
-              FontButtons(
-                strikeThrough2: true,
-                superscript: false,
-                subscript: false,
-                strikethrough: false,
+            controller: controller,
+            htmlEditorOptions: HtmlEditorOptions(
+              initialText: widget.textInnit,
+            ),
+            otherOptions: OtherOptions(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.transparent),
               ),
-              ParagraphButtons(
-                textDirection: false,
-                caseConverter: false,
-                alignRight: false,
-                alignJustify: false,
-              ),
-            ],
-            customToolbarButtons: [
-              // buildDropDownChangeLineHeight(context),
-            ],
+              height: MediaQuery.of(context).size.height -
+                  MediaQuery.of(context).padding.top -
+                  MediaQuery.of(context).padding.bottom -
+                  150,
+            ), iconUndo: SizedBox(), iconRedo: SizedBox(),
           ),
-          callbacks: null,
         ),
       ],
     );
